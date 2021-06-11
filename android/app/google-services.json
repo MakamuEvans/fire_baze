@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "368196998776",
+    "project_id": "flutterchat-a2838",
+    "storage_bucket": "flutterchat-a2838.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368196998776:android:654209b66ebfbab5f4bf8d",
+        "android_client_info": {
+          "package_name": "makamuevans.co.ke.fire_baze"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368196998776-649jtvq4jina74j0pk7qr617o352ll81.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoAFkSlF_6VMe4lbBeJoT9IZPxAgjSMNg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368196998776-649jtvq4jina74j0pk7qr617o352ll81.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
