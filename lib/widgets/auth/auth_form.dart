@@ -1,8 +1,11 @@
+import 'dart:io';
+
+import 'package:fire_baze/widgets/pickers/user_image_picker.dart';
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
   final void Function(String email, String password, String userName,
-      bool isLogin, BuildContext ctx) submitFn;
+      File image, bool isLogin, BuildContext ctx) submitFn;
 
   final bool isLoading;
 
@@ -18,13 +21,26 @@ class _AuthFormState extends State<AuthForm> {
   var _userName = '';
   var _userPassword = '';
   var _isLogIn = true;
+  File userImageFile;
+
+  void _pickedImage(File image) {
+    userImageFile = image;
+  }
 
   void _trySubmit() {
     final isValid = _formKey.currentState.validate();
     FocusScope.of(context).unfocus();
+    if (userImageFile == null && !_isLogIn) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Please pick an image!'),
+        backgroundColor: Theme.of(context).errorColor,
+      ));
+      return;
+    }
     if (isValid) {
       _formKey.currentState.save();
-      widget.submitFn(_userEmail, _userPassword, _userName, _isLogIn, context);
+      widget.submitFn(_userEmail, _userPassword, _userName, userImageFile,
+          _isLogIn, context);
     }
   }
 
@@ -41,6 +57,7 @@ class _AuthFormState extends State<AuthForm> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  if (!_isLogIn) UserImagePicker(_pickedImage),
                   TextFormField(
                     key: ValueKey('email'),
                     keyboardType: TextInputType.emailAddress,
@@ -73,7 +90,7 @@ class _AuthFormState extends State<AuthForm> {
                     obscureText: true,
                     validator: (value) {
                       if (value.isEmpty || value.length < 7)
-                        return 'Password must be atleast 7 characters long!';
+                        return 'Password must be at least 7 characters long!';
                       return null;
                     },
                     onSaved: (value) {
